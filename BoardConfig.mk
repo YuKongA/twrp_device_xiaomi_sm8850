@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2025 The Android Open Source Project
+# Copyright (C) 2026 The Android Open Source Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -25,15 +25,15 @@ ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
 # Bootloader
-PRODUCT_PLATFORM := sun
+PRODUCT_PLATFORM := canoe
 TARGET_BOOTLOADER_BOARD_NAME := $(PRODUCT_PLATFORM)
 TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 
 # Platform
-TARGET_BOARD_PLATFORM := xiaomi_sm8750
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno830
-QCOM_BOARD_PLATFORMS += xiaomi_sm8750
+TARGET_BOARD_PLATFORM := xiaomi_sm8850
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno840
+QCOM_BOARD_PLATFORMS += xiaomi_sm8850
 
 # Kernel
 TARGET_KERNEL_ARCH            := arm64
@@ -86,10 +86,14 @@ BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 104857600
 
 # Dynamic Partition
-BOARD_SUPER_PARTITION_SIZE := 11811160064
+BOARD_SUPER_PARTITION_SIZE := 13421772800
 BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
-BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 11809841488
+BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := $(shell echo $$(($(BOARD_SUPER_PARTITION_SIZE) - 4194304)))
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := system system_ext product vendor vendor_dlkm odm
+
+# System as root
+BOARD_ROOT_EXTRA_FOLDERS := bluetooth dsp firmware persist soccp
+BOARD_SUPPRESS_SECURE_ERASE := true
 
 # File systems
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -160,12 +164,11 @@ TW_DEFAULT_BRIGHTNESS := 250
 TW_EXCLUDE_APEX := true
 TW_HAS_EDL_MODE := false
 TW_SUPPORT_INPUT_AIDL_HAPTICS := true
-TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
 TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
 TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
 TW_SCREEN_BLANK_ON_BOOT := true
-TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko rproc_qcom_common.ko q6_dlkm.ko qcom_q6v5.ko qcom_q6v5_pas.ko qcom_sysmon.ko synaptics_tcm2.ko nxp-nci.ko stm_st54se_gpio.ko stm_nfc_i2c.ko qcom-hv-haptics.ko cs40l26-i2c.ko"
+TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko rproc_qcom_common.ko q6_dlkm.ko qcom_q6v5.ko qcom_q6v5_pas.ko qcom_sysmon.ko synaptics_tcm2.ko nt38773_touch.ko nxp-nci.ko stm_st54se_gpio.ko stm_nfc_i2c.ko qcom-hv-haptics.ko cs40l26-i2c.ko"
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
-TW_LOAD_PREBUILT_MODULES_AT_FIRST := true
-TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone1/temp" # CPU-0-0-0
-TW_BACKUP_EXCLUSIONS := /data/fonts
+TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone25/temp" # CPU-0-0-0
+TW_BACKUP_EXCLUSIONS := /data/fonts,/data/adb/ap,/data/adb/ksu
+TW_NO_NETWORK := true

@@ -1,9 +1,9 @@
-# Started once qseecomd has registered its listeners; libqtigatekeeper reaches
-# its trustlet through QSEECom.
-service vendor.gatekeeper_default /vendor/bin/hw/android.hardware.gatekeeper-service-qti
-    disabled
+on init
+    start vendor.gatekeeper_default
+
+service vendor.gatekeeper_default /vendor/bin/hw/android.hardware.gatekeeper-rust-service-qti
     class early_hal
     user root
     group root
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/odm/lib64:/system/lib64:/sbin
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/sbin:/odm/lib64
     seclabel u:r:recovery:s0

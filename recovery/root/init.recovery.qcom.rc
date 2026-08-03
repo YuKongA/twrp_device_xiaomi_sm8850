@@ -25,11 +25,8 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import /init.recovery.wifi.rc
-
 on init
     start vendor.boot-qti
-    setprop prepdecrypt.setpatch true
 
 on early-fs
     write /proc/sys/walt/sched_lib_name "recovery,magiskboot,Updater,updater,update_engine_sideload"
@@ -48,8 +45,9 @@ on fs
     start vendor.qseecomd
     mkdir /mnt/vendor 0775 shell system
     mkdir /mnt/vendor/persist 0775 shell system
-    mkdir /tmp/persist 0775 shell system
-    mount none /tmp/persist /mnt/vendor/persist bind rec
+    wait /dev/block/bootdevice/by-name/persist
+    mount ext4 /dev/block/bootdevice/by-name/persist /persist noatime nosuid nodev barrier=1
+    mount none /persist /mnt/vendor/persist bind
     install_keyring
 
 on post-fs
@@ -59,26 +57,38 @@ on boot
     setprop sys.usb.config adb
 
 # qseecomd is up, so the HALs that reach a trustlet through it can follow.
+# Gatekeeper and KeyMint are not among them here: both go straight to
+# /dev/smcinvoke through libminkdescriptor, so they stay on "on init".
 on property:vendor.sys.listeners.registered=true
-    start vendor.gatekeeper_default
     start vendor.secure_element
 
-# variant-script has copied this SKU's files into /odm.
-on property:twrp.variant.files_copied=1
-    start odm.vibratorfeature-service
-    start odm.touch_report
-    start odm.weaver-service
-
 on property:twrp.modules.loaded=true
-    # KeyMint stays down until this has pointed the version properties at the
-    # installed system, so start it as early as the mapper nodes allow.
-    start odm.prepdecrypt
     # Mount firmware
     mkdir /firmware
     mount vfat /dev/block/bootdevice/by-name/modem${ro.boot.slot_suffix} /firmware ro
     # Load ADSP firmware for PMIC
+    wait /sys/kernel/boot_adsp/boot
+    write /sys/kernel/boot_adsp/boot 1
+    # This make USB-OTG work
     wait /sys/kernel/boot_adsp/ssr
     write /sys/kernel/boot_adsp/ssr 1
     wait /sys/class/power_supply/battery
     start vendor.health-default
     umount /firmware
+
+on property:twrp.variant.files_copied=1
+    start odm.vibratorfeature-hal-service
+    start odm.touch_report
+
+# One weaver per variant. They all register IWeaver/default, so two of them
+# running means the later one silently replaces the earlier.
+on property:twrp.variant.files_copied=1 && property:ro.twrp.weaver=nxp
+    start odm.weaver_nxp
+
+on property:twrp.variant.files_copied=1 && property:ro.twrp.weaver=thales
+    start odm.weaver_hal_service
+
+# Its own eSE, reached through IGdxEse rather than OMAPI.
+on property:twrp.variant.files_copied=1 && property:ro.twrp.weaver=goodix
+    start odm.secure_element_hal_service
+    start odm.goodix_weaver_hal_service

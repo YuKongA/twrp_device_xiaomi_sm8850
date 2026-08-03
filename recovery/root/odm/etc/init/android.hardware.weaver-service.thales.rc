@@ -1,0 +1,7 @@
+service odm.weaver_hal_service /odm/bin/hw/android.hardware.weaver-service.thales
+    class hal
+    user root
+    group root drmrpc
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/sbin:/odm/lib64
+    disabled
+    seclabel u:r:recovery:s0

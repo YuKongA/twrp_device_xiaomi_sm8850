@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2025 The Android Open Source Project
+# Copyright (C) 2026 The Android Open Source Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -20,9 +20,12 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
 $(call inherit-product, vendor/twrp/config/common.mk)
 
 # API
-BOARD_SHIPPING_API_LEVEL := 35
-PRODUCT_SHIPPING_API_LEVEL := 35
-PRODUCT_TARGET_VNDK_VERSION := 35
+BOARD_SHIPPING_API_LEVEL := 202504
+PRODUCT_SHIPPING_API_LEVEL := 36
+PRODUCT_TARGET_VNDK_VERSION := 36
+
+# Build
+PRODUCT_CHECK_PREBUILT_MAX_PAGE_SIZE := false
 
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
@@ -30,7 +33,7 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 # Enable Fuse Passthrough
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.fuse.passthrough.enable=true
 
-# Otacert
+# otacert
 PRODUCT_EXTRA_RECOVERY_KEYS += \
     $(DEVICE_PATH)/security/releasekey
 

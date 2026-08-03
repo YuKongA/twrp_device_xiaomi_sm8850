@@ -1,22 +1,33 @@
 <!--
     Input:
-        device/qcom/sun/manifest_sun.xml
+        device/xiaomi/mivendor/manifest_canoe.xml
+        vendor/xiaomi/proprietary/slm/port/src/manifest_aidl.xml
+        vendor/xiaomi/proprietary/miwillp/port/src/manifest_aidl.xml
+        vendor/xiaomi/proprietary/minet/port/src/manifest_aidl.xml
+        vendor/xiaomi/proprietary/mipowerhal/port/src/manifest_aidl.xml
 -->
-<manifest version="8.0" type="device">
-    <hal format="aidl">
-        <name>android.hardware.gatekeeper</name>
-        <fqname>IGatekeeper/default</fqname>
-    </hal>
+<manifest version="9.0" type="device" target-level="202504">
     <hal format="aidl">
         <name>android.hardware.secure_element</name>
         <fqname>ISecureElement/eSE1</fqname>
     </hal>
     <hal format="aidl">
-        <name>android.hardware.nfc</name>
-        <fqname>INfc/default</fqname>
+        <name>vendor.qti.sla.service</name>
+        <fqname>ISlaAIDLService/default</fqname>
     </hal>
     <hal format="aidl">
-        <name>vendor.nxp.nxpnfc_aidl</name>
-        <fqname>INxpNfc/default</fqname>
+        <name>vendor.xiaomi.aidl.minet</name>
+        <fqname>IMiNetAIDLService/default</fqname>
     </hal>
+    <hal format="aidl">
+        <name>vendor.xiaomi.aidl.mipowerhal</name>
+        <fqname>IMiPowerHalAIDLService/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.xiaomi.aidl.miwill</name>
+        <fqname>IMiwillAIDLService/default</fqname>
+    </hal>
+    <sepolicy>
+        <version>202504</version>
+    </sepolicy>
 </manifest>

@@ -5,11 +5,11 @@
 set -e
 
 variant=$(getprop ro.boot.hardware.sku)
-base_name="Xiaomi 15"
+base_name="Xiaomi"
 log_file="/tmp/recovery.log"
 
 log() {
-    echo "variant-props-override.sh: $1" | tee -a "$log_file"
+    echo "variant-script.sh: $1" | tee -a "$log_file"
 }
 
 #-------------------------------------------------
@@ -28,32 +28,54 @@ set_vibrator_props() {
 # Variant-specific configuration
 #-------------------------------------------------
 case "$variant" in
-"dada")
-    model="$base_name"
-    resetprop ro.twrp.device_version "Xiaomi_15"
-    resetprop ro.twrp.y_offset "111"
-    resetprop ro.twrp.h_offset "-111"
+"pudding")
+    model="$base_name 17"
+    resetprop ro.twrp.device_version "Xiaomi_17"
+    resetprop ro.twrp.y_offset "116"
+    resetprop ro.twrp.h_offset "-116"
+    resetprop ro.odm.mm.vibrator.lowPowerMode "true"
     resetprop vendor.display.enable_spr "1"
+    resetprop ro.twrp.weaver "thales"
     set_vibrator_props "170" "35" "/sys/class/qcom-haptics" "ff"
     ;;
 
-"haotian")
-    model="$base_name Pro"
-    resetprop ro.twrp.device_version "Xiaomi_15_Pro"
+"pandora")
+    model="$base_name 17 Pro"
+    resetprop ro.twrp.device_version "Xiaomi_17_Pro"
     resetprop ro.twrp.y_offset "116"
     resetprop ro.twrp.h_offset "-116"
-    resetprop vendor.display.enable_spr "1"
-    resetprop ro.odm.mm.vibrator.cirrus "true"
     resetprop ro.odm.mm.vibrator.lowPowerMode "true"
-    set_vibrator_props "130" "20" "/sys/bus/i2c/drivers/cs40l26/0-0043" "ff"
+    resetprop vendor.display.enable_spr "1"
+    resetprop vendor.display.enable_spr_bypass "0"
+    resetprop vendor.display.enable_spr_bypass_secondary "1"
+    resetprop ro.twrp.weaver "nxp"
+    set_vibrator_props "170" "35" "/sys/class/qcom-haptics" "ff"
     ;;
 
-"xuanyuan")
-    model="$base_name Ultra"
-    resetprop ro.twrp.device_version "Xiaomi_15_Ultra"
+"popsicle")
+    model="$base_name 17 Pro Max"
+    resetprop ro.twrp.device_version "Xiaomi_17_Pro_Max"
     resetprop ro.twrp.y_offset "116"
     resetprop ro.twrp.h_offset "-116"
-    resetprop ro.odm.mm.vibrator.he1.0 "mihaptic"
+    resetprop ro.odm.mm.vibrator.cirrus "true"
+    resetprop ro.odm.mm.vibrator.lowPowerMode "true"
+    resetprop vendor.display.enable_spr "0"
+    resetprop vendor.display.enable_spr_bypass "1"
+    resetprop vendor.display.enable_spr_bypass_secondary "1"
+    resetprop ro.twrp.weaver "nxp"
+    set_vibrator_props "130" "20" "/sys/bus/i2c/drivers/cs40l26/13-0043" "ff"
+    ;;
+
+"nezha")
+    model="$base_name 17 Ultra"
+    resetprop ro.twrp.device_version "Xiaomi_17_Ultra"
+    resetprop ro.twrp.y_offset "116"
+    resetprop ro.twrp.h_offset "-116"
+    resetprop ro.odm.mm.vibrator.lowPowerMode "true"
+    resetprop vendor.display.enable_spr "0"
+    resetprop vendor.display.enable_spr_bypass "1"
+    resetprop vendor.display.enable_spr_bypass_secondary "1"
+    resetprop ro.twrp.weaver "goodix"
     set_vibrator_props "170" "20" "/sys/class/qcom-haptics" "ff"
     ;;
 
@@ -61,9 +83,9 @@ case "$variant" in
     #-----------------------------------------
     # Default configuration
     #-----------------------------------------
-    log "Unknown variant: $variant, applying default configuration (SM8750)"
-    variant="SM8750"
-    model="SM8750"
+    log "Unknown variant: $variant, applying default configuration (SM8850)"
+    variant="SM8850"
+    model="SM8850"
     set_vibrator_props "170" "35" "/sys/class/qcom-haptics" "ff"
     ;;
 esac

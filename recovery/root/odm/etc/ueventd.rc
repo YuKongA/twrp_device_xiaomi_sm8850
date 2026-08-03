@@ -31,7 +31,7 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # Base path for all VM's
-firmware_directories /product/vm-system/
+firmware_directories /vendor/vm-system/
 
 # TrustedUI VM
 external_firmware_handler /devices/platform/soc/soc:qcom,guestvm_loader@f3c00000/firmware/trustedvm.mdt system "/vendor/bin/vmmgr -r"
@@ -65,17 +65,8 @@ external_firmware_handler /devices/platform/soc/soc:gh-secure-vm-loader@1/firmwa
 external_firmware_handler /devices/platform/soc/soc:gh-secure-vm-loader@1/firmware/oemvm.b04 system "/vendor/bin/vmmgr -r"
 external_firmware_handler /devices/platform/soc/soc:gh-secure-vm-loader@1/firmware/oemvm.b05 system "/vendor/bin/vmmgr -r"
 
-# xiaomi display feature
-subsystem mi_display
-    devname uevent_devpath
-    dirname /dev/mi_display
+#launch boost
+/dev/iorap_dev  0660  system  system
 
-# xiaomi display feature
-/dev/mi_display/*         0666   root       graphics
-
-# xiaomi ntag
-/dev/fm-ntag              0660   nfc        nfc
-/dev/nxp-ntag             0660   nfc        nfc
-
- hang_task
+# hang_task
 /dev/Monitor_Hang	0660	system	system

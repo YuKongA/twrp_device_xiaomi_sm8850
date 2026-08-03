@@ -9,11 +9,17 @@ on late-fs
     chown system system /sys/class/qcom-haptics/lra_frequency_hz
     chmod 0666 /sys/class/qcom-haptics/lra_frequency_hz
 
-   # aw86224_haptic
+    # aw86224_haptic
     chown system system /sys/bus/i2c/drivers/awinic_haptic/2-005a/f0_save
     chown system system /sys/bus/i2c/drivers/awinic_haptic/2-005a/osc_save
     chown system system /sys/bus/i2c/drivers/awinic_haptic/2-005a/custom_wave
     chmod 0666  /sys/bus/i2c/drivers/awinic_haptic/2-005a/custom_wave
+
+    # awinic_haptic for O9
+    chown system system /sys/bus/i2c/drivers/awinic_haptic/10-005a/f0_save
+    chown system system /sys/bus/i2c/drivers/awinic_haptic/10-005a/osc_save
+    chown system system /sys/bus/i2c/drivers/awinic_haptic/10-005a/custom_wave
+    chmod 0666  /sys/bus/i2c/drivers/awinic_haptic/10-005a/custom_wave
 
     # SI Haptic 6887
     chown system system /sys/bus/i2c/drivers/sih_haptic_688X/2-006b/f0_save
@@ -21,73 +27,86 @@ on late-fs
     chown system system /sys/bus/i2c/drivers/sih_haptic_688X/2-006b/custom_wave
     chmod 0666  /sys/bus/i2c/drivers/sih_haptic_688X/2-006b/custom_wave
 
+    # SI Haptic 6887
+    chown system system /sys/bus/i2c/drivers/sih_haptic_688X/5-006b/f0_save
+    chown system system /sys/bus/i2c/drivers/sih_haptic_688X/5-006b/osc_save
+    chown system system /sys/bus/i2c/drivers/sih_haptic_688X/5-006b/custom_wave
+    chmod 0666  /sys/bus/i2c/drivers/sih_haptic_688X/5-006b/custom_wave
+
+    # awinic_haptic for O10U
+    chown system system /sys/bus/i2c/drivers/awinic_haptic/5-005a/f0_save
+    chown system system /sys/bus/i2c/drivers/awinic_haptic/5-005a/osc_save
+    chown system system /sys/bus/i2c/drivers/awinic_haptic/5-005a/custom_wave
+    chmod 0666  /sys/bus/i2c/drivers/awinic_haptic/5-005a/custom_wave
+
     #input X is allocated by the system to, and we can't know in advance how muchso try all of them
     # CIRRUS Haptic 0
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input0/calibration/redc_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input0/calibration/f0_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input0/calibration/q_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input0/calibration/redc_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input0/calibration/f0_stored
 
     # CIRRUS Haptic 1
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input1/calibration/redc_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input1/calibration/f0_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input1/calibration/q_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input1/calibration/redc_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input1/calibration/f0_stored
 
     # CIRRUS Haptic 2
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input2/calibration/redc_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input2/calibration/f0_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input2/calibration/q_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input2/calibration/redc_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input2/calibration/f0_stored
 
     # CIRRUS Haptic 3
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input3/calibration/redc_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input3/calibration/f0_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input3/calibration/q_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input3/calibration/redc_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input3/calibration/f0_stored
 
     # CIRRUS Haptic 4
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input4/calibration/redc_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input4/calibration/f0_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input4/calibration/q_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input4/calibration/redc_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input4/calibration/f0_stored
 
     # CIRRUS Haptic 5
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input5/calibration/redc_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input5/calibration/f0_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input5/calibration/q_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input5/calibration/redc_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input5/calibration/f0_stored
 
     # CIRRUS Haptic 6
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input6/calibration/redc_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input6/calibration/f0_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input6/calibration/q_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input6/calibration/redc_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input6/calibration/f0_stored
 
     # CIRRUS Haptic 7
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input7/calibration/redc_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input7/calibration/f0_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input7/calibration/q_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input7/calibration/redc_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input7/calibration/f0_stored
 
     # CIRRUS Haptic 8
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input8/calibration/redc_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input8/calibration/f0_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input8/calibration/q_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input8/calibration/redc_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input8/calibration/f0_stored
 
     # CIRRUS Haptic 9
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input9/calibration/redc_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input9/calibration/f0_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input9/calibration/q_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input9/calibration/redc_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input9/calibration/f0_stored
 
     # CIRRUS Haptic 10
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input10/calibration/redc_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input10/calibration/f0_stored
-    chown system system /sys/bus/i2c/drivers/cs40l26/0-0043/input/input10/calibration/q_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input10/calibration/redc_stored
+    chown system system /sys/bus/i2c/drivers/cs40l26/13-0043/input/input10/calibration/f0_stored
 
     # cal-file directory
     mkdir /mnt/vendor/persist/haptics 0755 system system
 
-service odm.vibratorfeature-service /odm/bin/hw/vendor.xiaomi.hardware.vibratorfeature.service
+service odm.vibratorfeature-hal-service /odm/bin/hw/vendor.xiaomi.hardware.vibratorfeature.service
     class hal
     user root
     group root input audio
     onrestart restart vibratorfeature
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/odm/lib64:/system/lib64:/sbin
+    setenv RICHTAP_DEVICE_PATH /dev/qcom_haptic
+    setenv ENV_RICHTAP_CONFIG_PATH /odm/etc/aac_richtap.config
+    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib64/hw:/system/lib64:/sbin:/odm/lib64
     disabled
     seclabel u:r:recovery:s0
 
 on property:servicemanager.ready=true
     setprop vendor.haptic.calibrate.done 1
+    # mode = interaction
+    setprop vendor.aihaptic.interaction.transient_intensity 100
+    setprop vendor.aihaptic.interaction.transient_sharpness 56
+    setprop vendor.aihaptic.interaction.continuous_intensity 100
+    setprop vendor.aihaptic.interaction.continuous_sharpness 56
+    # mode = warn
+    setprop vendor.aihaptic.warn.transient_intensity 100
+    setprop vendor.aihaptic.warn.transient_sharpness 56
+    setprop vendor.aihaptic.warn.continuous_intensity 65
+    setprop vendor.aihaptic.warn.continuous_sharpness 56

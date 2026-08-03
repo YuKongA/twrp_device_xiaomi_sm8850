@@ -1,7 +1,10 @@
 import /vendor/etc/ueventd.rc
 import /odm/etc/ueventd.rc
 
-firmware_directories /etc/firmware/ /odm/firmware/ /vendor/firmware/ /firmware/image/
+# MIUI MOD: WIFI_VendorApex
+# firmware_directories /etc/firmware/ /odm/firmware/ /vendor/firmware/ /firmware/image/
+firmware_directories /apex/com.xiaomi.wifi/etc/ /etc/firmware/ /odm/firmware/ /vendor/firmware/ /firmware/image/
+# END WIFI_VendorApex
 uevent_socket_rcvbuf_size 16M
 
 subsystem graphics

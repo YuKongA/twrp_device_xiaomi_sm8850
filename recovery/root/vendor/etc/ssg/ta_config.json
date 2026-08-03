@@ -1,8 +1,8 @@
 /********************************************************************
-Copyright (c) 2018-2019,2022 Qualcomm Technologies, Inc.
-All Rights Reserved.
-Confidential and Proprietary - Qualcomm Technologies, Inc.
-*********************************************************************/
+ Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ All rights reserved.
+ Confidential and Proprietary - Qualcomm Technologies, Inc.
+ *********************************************************************/
 {
 // Configuration for System Clients maintained by ssgtzd
 // MaxSystemClients: Number of Clients Allowed in System Domain (Apk)

@@ -1,0 +1,8 @@
+on property:servicemanager.ready=true
+    start vendor.kernel-post-boot
+
+service vendor.kernel-post-boot /system/bin/sh -c /vendor/bin/init.kernel.post_boot-canoe_default_6_2.sh
+    user root
+    group root
+    oneshot
+    seclabel u:r:recovery:s0

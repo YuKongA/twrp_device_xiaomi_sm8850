@@ -1,0 +1,22 @@
+<!--
+    Input:
+        vendor/goodix/security/opensource/halimpl/secure_element/aidl/secure_element-service-goodix.xml
+-->
+<manifest version="1.0" type="device">
+    <hal format="aidl">
+        <name>android.hardware.secure_element</name>
+        <version>1</version>
+        <interface>
+            <name>ISecureElement</name>
+            <instance>eSE2</instance>
+        </interface>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.goodix.hardware.secure_element_aidl</name>
+        <version>1</version>
+        <interface>
+            <name>IGdxEse</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+</manifest>
