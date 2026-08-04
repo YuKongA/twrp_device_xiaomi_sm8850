@@ -46,7 +46,6 @@ case "$variant" in
     resetprop ro.twrp.h_offset "-116"
     resetprop vendor.display.enable_spr "1"
     resetprop vendor.display.enable_spr_bypass "0"
-    resetprop vendor.display.enable_spr_bypass_secondary "1"
     resetprop ro.twrp.weaver "nxp"
     set_vibrator_props "170" "35" "/sys/class/qcom-haptics" "ff"
     ;;
@@ -57,9 +56,8 @@ case "$variant" in
     resetprop ro.twrp.y_offset "116"
     resetprop ro.twrp.h_offset "-116"
     resetprop ro.odm.mm.vibrator.cirrus "true"
-    resetprop vendor.display.enable_spr "0"
+    resetprop vendor.display.enable_spr "1"
     resetprop vendor.display.enable_spr_bypass "1"
-    resetprop vendor.display.enable_spr_bypass_secondary "1"
     resetprop ro.twrp.weaver "nxp"
     set_vibrator_props "130" "20" "/sys/bus/i2c/drivers/cs40l26/13-0043" "ff"
     ;;
@@ -69,9 +67,8 @@ case "$variant" in
     resetprop ro.twrp.device_version "Xiaomi_17_Ultra"
     resetprop ro.twrp.y_offset "116"
     resetprop ro.twrp.h_offset "-116"
-    resetprop vendor.display.enable_spr "0"
+    resetprop vendor.display.enable_spr "1"
     resetprop vendor.display.enable_spr_bypass "1"
-    resetprop vendor.display.enable_spr_bypass_secondary "1"
     resetprop ro.twrp.weaver "goodix"
     set_vibrator_props "170" "20" "/sys/class/qcom-haptics" "ff"
     ;;
