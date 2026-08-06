@@ -5,4 +5,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/twrp_sm8850.mk
+    $(LOCAL_DIR)/omni_sm8850.mk
