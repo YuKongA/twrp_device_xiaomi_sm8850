@@ -22,6 +22,7 @@
 - [x] Sideload
 - [x] USB-OTG
 - [x] Vibrator
+- [X] WLAN
 
 ## Build it yourself
 
