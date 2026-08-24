@@ -1,7 +1,6 @@
 # SM8850 / canoe Qualcomm Wi-Fi recovery support.
 
 on init
-    # wpa_cli_recovery drops to the wifi user and creates a local socket in /tmp.
     chown root wifi /tmp
     chmod 0775 /tmp
     mkdir /tmp/recovery 0777 root root
@@ -21,54 +20,14 @@ on early-boot
     write /proc/sys/kernel/firmware_config/force_sysfs_fallback 1
 
 on property:twrp.firmware.mounted=true
-    start cp-wifi-ko
-
-on property:twrp.cpko=true
-    insmod /odm/wifi/modules/smem-mailbox.ko
-    insmod /odm/wifi/modules/qmi_helpers.ko
-    insmod /odm/wifi/modules/qcom_glink.ko
-    insmod /odm/wifi/modules/qcom_glink_smem.ko
-    insmod /odm/wifi/modules/qcom_smd.ko
-    insmod /odm/wifi/modules/rproc_qcom_common.ko
-    insmod /odm/wifi/modules/qcom_ramdump.ko
-    insmod /odm/wifi/modules/qcom_va_minidump.ko
-    insmod /odm/wifi/modules/pci-msm-drv.ko
-    insmod /odm/wifi/modules/pcie-pdc.ko
-    insmod /odm/wifi/modules/mhi.ko
-    insmod /odm/wifi/modules/usb_f_gsi.ko
-    insmod /odm/wifi/modules/dwc3-msm.ko
-    insmod /odm/wifi/modules/repeater.ko
-    insmod /odm/wifi/modules/redriver.ko
-    insmod /odm/wifi/modules/mca_sysfs.ko
-    insmod /odm/wifi/modules/wcd_usbss_i2c.ko
-    insmod /odm/wifi/modules/cnss_prealloc.ko
-    insmod /odm/wifi/modules/cnss_utils.ko
-    insmod /odm/wifi/modules/cnss_plat_ipc_qmi_svc.ko
-    insmod /odm/wifi/modules/cnss_nl.ko
-    insmod /odm/wifi/modules/wlan_firmware_service.ko
-    insmod /odm/wifi/modules/cnss2.ko
-    insmod /odm/wifi/modules/rfkill.ko
-    insmod /odm/wifi/modules/cfg80211.ko
-    insmod /odm/wifi/modules/mac80211.ko
-    insmod /odm/wifi/modules/gsim.ko
-    insmod /odm/wifi/modules/rmnet_mem.ko
-    insmod /odm/wifi/modules/ipam.ko
     chmod 0222 /sys/devices/platform/soc/b0000000.qcom,cnss-peach/fs_ready
     write /sys/devices/platform/soc/b0000000.qcom,cnss-peach/fs_ready 1
-    insmod /odm/wifi/modules/qca_cld3_peach_v2.ko
+    insmod /vendor/lib/modules/qca_cld3_peach_v2.ko
     wait /sys/class/net/wlan0 15
     setprop twrp.wifi.driver.ready true
 
 on property:twrp.wifi.driver.ready=true
     start wpa_supplicant
-
-service cp-wifi-ko /system/bin/cp-wifi-ko.sh
-    class core
-    disabled
-    user root
-    group root
-    oneshot
-    seclabel u:r:recovery:s0
 
 service wpa_supplicant /system/bin/wpa_supplicant -Dnl80211 -iwlan0 -c/system/etc/wifi/wpa_supplicant.conf
     class main
