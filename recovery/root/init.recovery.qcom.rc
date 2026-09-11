@@ -61,7 +61,7 @@ on boot
 # qseecomd is up, so the HALs that reach a trustlet through it can follow.
 # Gatekeeper and KeyMint are not among them here: both go straight to
 # /dev/smcinvoke through libminkdescriptor, so they stay on "on init".
-on property:vendor.sys.listeners.registered=true
+on property:vendor.sys.listeners.registered=true && property:twrp.firmware.mounted=true
     start vendor.secure_element
 
 on property:twrp.modules.loaded=true
