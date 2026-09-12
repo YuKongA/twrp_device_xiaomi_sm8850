@@ -129,9 +129,6 @@ TARGET_RECOVERY_DEVICE_MODULES += prebuilt
 # Fastbootd
 TW_INCLUDE_FASTBOOTD := true
 
-# Wi-Fi
-TW_INCLUDE_WIFI := true
-
 # Other TWRP Configurations
 TW_THEME := portrait_hdpi
 TW_FRAMERATE := 120
@@ -148,11 +145,11 @@ TW_MAX_BRIGHTNESS := 2047
 TW_EXTRA_LANGUAGES := true
 TW_DEFAULT_BRIGHTNESS := 250
 TW_EXCLUDE_APEX := true
+TW_STATUS_ICONS_ALIGN := center
 TW_SUPPORT_INPUT_AIDL_HAPTICS := true
 TW_SUPPORT_INPUT_AIDL_HAPTICS_FIX_OFF := true
 TW_USE_SERIALNO_PROPERTY_FOR_DEVICE_ID := true
-TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko rproc_qcom_common.ko q6_dlkm.ko qcom_q6v5.ko qcom_q6v5_pas.ko qcom_sysmon.ko synaptics_tcm2.ko nt38773_touch.ko nxp-nci.ko stm_st54se_gpio.ko stm_nfc_i2c.ko qcom-hv-haptics.ko cs40l26-i2c.ko smem-mailbox.ko qmi_helpers.ko qcom_glink.ko qcom_glink_smem.ko qcom_smd.ko qcom_ramdump.ko qcom_va_minidump.ko pci-msm-drv.ko pcie-pdc.ko mhi.ko usb_f_gsi.ko dwc3-msm.ko repeater.ko redriver.ko mca_sysfs.ko wcd_usbss_i2c.ko cnss_prealloc.ko cnss_utils.ko cnss_plat_ipc_qmi_svc.ko cnss_nl.ko wlan_firmware_service.ko cnss2.ko rfkill.ko cfg80211.ko mac80211.ko gsim.ko rmnet_mem.ko ipam.ko"
+TW_LOAD_VENDOR_MODULES := "adsp_loader_dlkm.ko rproc_qcom_common.ko q6_dlkm.ko qcom_q6v5.ko qcom_q6v5_pas.ko qcom_sysmon.ko synaptics_tcm2.ko nt38773_touch.ko nxp-nci.ko stm_st54se_gpio.ko stm_nfc_i2c.ko qcom-hv-haptics.ko cs40l26-i2c.ko"
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
-TW_LOAD_PREBUILT_MODULES_AT_FIRST := true
 TW_CUSTOM_CPU_TEMP_PATH := "/sys/class/thermal/thermal_zone25/temp" # CPU-0-0-0
 TW_BACKUP_EXCLUSIONS := /data/fonts,/data/adb/ap,/data/adb/ksu

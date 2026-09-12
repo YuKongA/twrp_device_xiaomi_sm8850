@@ -25,8 +25,6 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import /init.recovery.wifi.rc
-
 on init
     start vendor.boot-qti
 
@@ -44,13 +42,13 @@ on fs
     chown system system /dev/ion
     # Its SSD listener opens by-name/ssd, which ueventd may not have made yet.
     wait /dev/block/bootdevice/by-name/ssd 10
-    start vendor.qseecomd
     mkdir /mnt/vendor 0775 shell system
     mkdir /mnt/vendor/persist 0775 shell system
     wait /dev/block/bootdevice/by-name/persist
     mount ext4 /dev/block/bootdevice/by-name/persist /persist noatime nosuid nodev barrier=1
     mount none /persist /mnt/vendor/persist bind
     install_keyring
+    start vendor.qseecomd
 
 on post-fs
     start odm.variant-script
@@ -58,42 +56,41 @@ on post-fs
 on boot
     setprop sys.usb.config adb
 
-# qseecomd is up, so the HALs that reach a trustlet through it can follow.
-# Gatekeeper and KeyMint are not among them here: both go straight to
-# /dev/smcinvoke through libminkdescriptor, so they stay on "on init".
-on property:vendor.sys.listeners.registered=true && property:twrp.firmware.mounted=true
-    start vendor.secure_element
 
 on property:twrp.modules.loaded=true
-    # Keep the modem image mounted: qca_cld3_peach_v2 loads WLAN firmware
-    # from /vendor/firmware_mnt/image after the driver is inserted.
-    mkdir /vendor/firmware_mnt 0755 root shell
-    mount vfat /dev/block/bootdevice/by-name/modem${ro.boot.slot_suffix} /vendor/firmware_mnt ro,shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337
+    # Mount firmware
     mkdir /firmware
-    mount none /vendor/firmware_mnt /firmware bind
+    mount vfat /dev/block/bootdevice/by-name/modem${ro.boot.slot_suffix} /firmware ro
     # Load ADSP firmware for PMIC
     wait /sys/kernel/boot_adsp/boot
     write /sys/kernel/boot_adsp/boot 1
     # This make USB-OTG work
     wait /sys/kernel/boot_adsp/ssr
     write /sys/kernel/boot_adsp/ssr 1
-    wait /sys/class/power_supply/battery
+    start vendor.wait-adsp
+
+on property:twrp.adsp.ready=true && property:vendor.sys.listeners.registered=true
     start vendor.health-default
-    setprop twrp.firmware.mounted true
+    start vendor.secure_element
 
 on property:twrp.variant.files_copied=1
     start odm.vibratorfeature-hal-service
     start odm.touch_report
 
-# One weaver per variant. They all register IWeaver/default, so two of them
-# running means the later one silently replaces the earlier.
 on property:twrp.variant.files_copied=1 && property:ro.twrp.weaver=nxp
     start odm.weaver_nxp
 
 on property:twrp.variant.files_copied=1 && property:ro.twrp.weaver=thales
     start odm.weaver_hal_service
 
-# Its own eSE, reached through IGdxEse rather than OMAPI.
 on property:twrp.variant.files_copied=1 && property:ro.twrp.weaver=goodix
     start odm.secure_element_hal_service
     start odm.goodix_weaver_hal_service
+
+service vendor.wait-adsp /system/bin/sh /vendor/bin/wait-adsp-ready.sh
+    class hal
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
