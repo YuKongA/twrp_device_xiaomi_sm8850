@@ -77,6 +77,16 @@ on property:twrp.variant.files_copied=1
     start odm.vibratorfeature-hal-service
     start odm.touch_report
 
+on property:twrp.variant.files_copied=1 && property:twrp.modules.loaded=true && property:ro.boot.hardware.sku=nezha
+    start vendor.weaver-detect
+
+service vendor.weaver-detect /system/bin/sh /system/bin/weaver-vendor.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
 on property:twrp.variant.files_copied=1 && property:ro.twrp.weaver=nxp
     start odm.weaver_nxp
 

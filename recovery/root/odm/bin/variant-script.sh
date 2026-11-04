@@ -69,7 +69,6 @@ case "$variant" in
     resetprop ro.twrp.h_offset "-116"
     resetprop vendor.display.enable_spr "1"
     resetprop vendor.display.enable_spr_bypass "1"
-    resetprop ro.twrp.weaver "goodix"
     set_vibrator_props "170" "20" "/sys/class/qcom-haptics" "ff"
     ;;
 
