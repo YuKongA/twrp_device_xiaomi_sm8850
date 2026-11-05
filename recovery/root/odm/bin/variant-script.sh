@@ -72,6 +72,44 @@ case "$variant" in
     set_vibrator_props "170" "20" "/sys/class/qcom-haptics" "ff"
     ;;
 
+"byron")
+    model="$base_name 17 Max"
+    resetprop ro.twrp.device_version "Xiaomi_17_Max"
+    resetprop ro.twrp.y_offset "116"
+    resetprop ro.twrp.h_offset "-116"
+    resetprop vendor.display.enable_spr "1"
+    resetprop vendor.display.enable_spr_bypass "1"
+    resetprop ro.twrp.weaver "nxp"
+    set_vibrator_props "170" "35" "/sys/class/qcom-haptics" "ff"
+    ;;
+
+"myron")
+    model="REDMI K90 Pro Max"
+    resetprop ro.twrp.device_version "REDMI_K90_Pro_Max"
+    resetprop vendor.display.enable_spr "1"
+    resetprop vendor.display.enable_spr_bypass "1"
+    resetprop ro.twrp.weaver "nxp"
+    set_vibrator_props "170" "35" "/sys/class/qcom-haptics" "ff"
+    ;;
+
+"athens")
+    model="REDMI K100 Pro"
+    resetprop ro.twrp.device_version "REDMI_K100_Pro"
+    resetprop vendor.display.enable_spr "1"
+    resetprop vendor.display.enable_spr_bypass "1"
+    resetprop ro.twrp.weaver "nxp"
+    set_vibrator_props "170" "35" "/sys/class/qcom-haptics" "ff"
+    ;;
+
+"songyuan")
+    model="REDMI K100 Pro Max"
+    resetprop ro.twrp.device_version "REDMI_K100_Pro_Max"
+    resetprop vendor.display.enable_spr "1"
+    resetprop vendor.display.enable_spr_bypass "1"
+    resetprop ro.twrp.weaver "thales"
+    set_vibrator_props "170" "35" "/sys/class/qcom-haptics" "ff"
+    ;;
+
 *)
     #-----------------------------------------
     # Default configuration

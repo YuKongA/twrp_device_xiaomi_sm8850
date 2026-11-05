@@ -2,12 +2,16 @@
 
 ## Supported devices
 
-| Codename | Device               |
-| -------- | -------------------- |
-| pudding  | Xiaomi 17            |
-| pandora  | Xiaomi 17 Pro        |
-| popsicle | Xiaomi 17 Pro Max \* |
-| nezha    | Xiaomi 17 Ultra      |
+| Codename | Device                                |
+| -------- | ------------------------------------- |
+| pudding  | Xiaomi 17                             |
+| pandora  | Xiaomi 17 Pro                         |
+| popsicle | Xiaomi 17 Pro Max \*                  |
+| nezha    | Xiaomi 17 Ultra                       |
+| byron    | Xiaomi 17 Max                         |
+| myron    | REDMI K90 Pro Max / POCO F8 Ultra     |
+| athens   | REDMI K100 Pro / POCO F9 Pro          |
+| songyuan | REDMI K100 Pro Max / POCO F9 Ultra    |
 
 \* Primary test device
 
