@@ -80,7 +80,8 @@ jobs:
 
     - name: Setup zram
       run: |
-        sudo apt install linux-modules-extra-$(uname -r) zram-tools -y
+        sudo apt-get update
+        sudo apt-get install -y zram-tools
         sudo modprobe zram
         sudo sed -i 's/^#PERCENT=50/PERCENT=90/' /etc/default/zramswap
         sudo sed -i 's/^#PRIORITY=100/PRIORITY=1000/' /etc/default/zramswap
@@ -137,7 +138,7 @@ jobs:
         kill $TIP_PID && exit 0        
 
     - name: Upload to Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         files: | 
           out/target/product/${{ github.event.inputs.DEVICE_NAME }}/TWRP-3.7.1-16-${{ github.event.inputs.DEVICE_NAME }}-${{ env.BUILD_DATE }}.img
